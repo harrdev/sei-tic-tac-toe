@@ -6,7 +6,11 @@ let playerOTurn = false;
 let gameOver = false;
 const message = document.querySelector(".message");
 const board = document.querySelector(".main");
+const pOne = document.getElementById("pOneScore");
+const pTwo = document.getElementById("pTwoScore");
 const sqId = ("1", "2", "3", "4", "5", "6", "7", "8");
+let pOneScore = 0
+let pTwoScore = 0
 // display message to start
 message.innerText = "Player 1 is X, Player 2 is O.  Begin by selecting your square."
 
@@ -20,6 +24,9 @@ let match = 0;
         match++;
         if (match === 3) {
          message.innerText = "Player 1 (X) wins!";
+         pOneScore += 1;
+         console.log(pOneScore)
+         pOne.innerText = "Player 1 (X) = " + pOneScore
          gameOver = true;
          break;
        }
@@ -36,6 +43,8 @@ let match = 0;
          match++;
        if (match === 3) {
          message.innerText = "Player 2 (O) wins!";
+         pTwoScore += 1;
+         pTwo.innerText = "Player 2 (O) = " + pTwoScore
          gameOver = true;
          break;
        }
@@ -43,7 +52,6 @@ let match = 0;
    }
   }
 }
-
 // update player turn, switching back and forth true and false
 // This grabs the ID of the div that is clicked on.  Need to use this ID to update player click arrays
 board.addEventListener("click", function(e) {
@@ -72,7 +80,7 @@ board.addEventListener("click", function(e) {
         message.innerText = "Player 1, it's your turn!";
         // Checks for tie
         if (playerOneScore.length + playerTwoScore.length === 9) {
-          message.innerText = "It's a tie!"
+          message.innerText = "It's a tie!";
         }
         // Executes win condition function
         playerTwoWin();
@@ -95,5 +103,5 @@ for (let i = 0; i < squares.length; i++) {
   playerXTurn = true;
   playerOTurn = false;
   gameOver = false;
-  message.innerText = "Player 1 is X, Player 2 is O.  Begin by selecting your square."
+  message.innerText = "Player 1 is X, Player 2 is O.  Begin by selecting your square.";
 });
