@@ -25,7 +25,7 @@ const playerOneWin = () => {
           message.innerText = "Player 1 (X) wins!";
           pOneScore += 1;
           console.log(pOneScore)
-          pOne.innerText = "Player 1 (X) = " + pOneScore
+          pOne.innerText = "Player 1: " + pOneScore
           gameOver = true;
           break;
         }
@@ -43,7 +43,7 @@ const playerTwoWin = () => {
         if (match === 3) {
           message.innerText = "Player 2 (O) wins!";
           pTwoScore += 1;
-          pTwo.innerText = "Player 2 (O) = " + pTwoScore
+          pTwo.innerText = "Player 2: " + pTwoScore
           gameOver = true;
           break;
         }

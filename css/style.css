@@ -1,5 +1,6 @@
 body {
     background-color: #25274d;
+    font-family: 'Heebo', sans-serif;
 }
 
 .titleContainer {
@@ -65,20 +66,29 @@ button {
     text-align: center;
 }
 
+.scoreBoard {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    width: 700px;
+    font-size: 50px;
+    color: yellow;
+}
 .score {
     display: flex;
     justify-content: center;
     width: 700px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 #pOneScore, #pTwoScore {
-    height: 100px;
+    height: 50px;
     width: 295px;
     font-size: 30px;
     text-align: center;
     background-color: yellow;
     border: 3px solid black;
     font-weight: bold;
-    line-height: 100px;
+    line-height: 50px;
 }
