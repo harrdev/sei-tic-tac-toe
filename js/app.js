@@ -15,7 +15,7 @@ message.innerText = "Player 1 is X, Player 2 is O.  Begin by selecting your squa
 
 //*----------------------------------------Player Win or Tie Checks--------------------------------------*//
 const playerOneWin = () => {
-  let match = 0;
+  let match;
   for (let condition of winCondition) {
     match = 0;
     for (let score of playerOneScore) {
@@ -34,7 +34,7 @@ const playerOneWin = () => {
   }
 }
 const playerTwoWin = () => {
-  let match = 0;
+  let match;
   for (let condition of winCondition) {
     match = 0;
     for (let score of playerTwoScore) {
@@ -95,8 +95,8 @@ board.addEventListener("click", function (e) {
 document.querySelector("button").addEventListener("click", () => {
   console.log("Reset button clicked");
   const squares = document.querySelectorAll(".square");
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].innerText = '';
+  for (let square of squares) {
+    square.innerText = '';
   }
   playerOneScore = [];
   playerTwoScore = [];
