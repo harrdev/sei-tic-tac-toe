@@ -13,13 +13,13 @@ let pOneScore = 0;
 let pTwoScore = 0;
 message.innerText = "Player 1 is X, Player 2 is O.  Begin by selecting your square."
 
-//*----------------------------------------Player Win Checks--------------------------------------*//
+//*----------------------------------------Player Win or Tie Checks--------------------------------------*//
 const playerOneWin = () => {
   let match = 0;
-  for (let i = 0; i < winCondition.length; i++) {
+  for (let condition of winCondition) {
     match = 0;
-    for (let j = 0; j < playerOneScore.length; j++) {
-      if (winCondition[i].includes(playerOneScore[j])) {
+    for (let score of playerOneScore) {
+      if (condition.includes(score)) {
         match++;
         if (match === 3) {
           message.innerText = "Player 1 (X) wins!";
@@ -35,10 +35,10 @@ const playerOneWin = () => {
 }
 const playerTwoWin = () => {
   let match = 0;
-  for (let i = 0; i < winCondition.length; i++) {
+  for (let condition of winCondition) {
     match = 0;
-    for (let j = 0; j < playerTwoScore.length; j++) {
-      if (winCondition[i].includes(playerTwoScore[j])) {
+    for (let score of playerTwoScore) {
+      if (condition.includes(score)) {
         match++;
         if (match === 3) {
           message.innerText = "Player 2 (O) wins!";
@@ -51,36 +51,37 @@ const playerTwoWin = () => {
     }
   }
 }
+const checkTie = () => {
+  if (playerOneScore.length + playerTwoScore.length === 9) {
+    message.innerText = "It's a tie!";
+  }
+}
 //*-----------------------------------------Main Game Logic--------------------------------------*//
 // This grabs the ID of the div that is clicked on.  Need to use this ID to update player click arrays
 board.addEventListener("click", function (e) {
   const selectedId = e.target.id;
   if (selectedId !== '') {
     // Player 1 (X) logic - Checks to see if game is over, if it's their turn, and that the div has not been clicked/selected yet
-    if (gameOver === false && playerXTurn === true && playerOneScore.indexOf(selectedId) === -1 && playerTwoScore.indexOf(selectedId) === -1) {
+    if (!gameOver && playerXTurn && playerOneScore.indexOf(selectedId) === -1 && playerTwoScore.indexOf(selectedId) === -1) {
       playerOneScore.push(selectedId);
       playerOneScore.sort();
       document.getElementById(selectedId).innerText = "X";
       message.innerText = "Player 2, it's your turn!";
       // Checks for tie
-      if (playerOneScore.length + playerTwoScore.length === 9) {
-        message.innerText = "It's a tie!"
-      }
+      checkTie();
       // Executes win condition function
       playerOneWin();
       // Changes players turns
       playerXTurn = false;
       playerOTurn = true;
       // Player 2 (O) logic - Checks to see if game is over, if it's their turn, and that the div has not been clicked/selected yet  
-    } else if (gameOver === false && playerOTurn === true && playerOneScore.indexOf(selectedId) ===  -1 && playerTwoScore.indexOf(selectedId) === -1) {
+    } else if (!gameOver && playerOTurn && playerOneScore.indexOf(selectedId) ===  -1 && playerTwoScore.indexOf(selectedId) === -1) {
       playerTwoScore.push(selectedId);
       playerTwoScore.sort();
       document.getElementById(selectedId).innerText = "O";
       message.innerText = "Player 1, it's your turn!";
       // Checks for tie
-      if (playerOneScore.length + playerTwoScore.length === 9) {
-        message.innerText = "It's a tie!";
-      }
+      checkTie();
       // Executes win condition function
       playerTwoWin();
       // Changes players turns
